@@ -1,0 +1,95 @@
+//stack is implemented using Linked List in C language
+
+#include <stdio.h>
+#include<stdlib.h>
+
+struct node{
+    int data;
+    struct node* next;
+};
+
+struct node* push(struct node *top , int value){
+    // printf("hi\n");
+    
+    struct node* newNode;
+    newNode=(struct node*)malloc(sizeof(struct node));
+    newNode -> data = value;
+    
+    if(top==NULL){
+       newNode -> next = NULL;
+       top=newNode;
+    }
+    
+    else {
+    // newNode=top;
+    newNode -> next = top;
+    top = newNode;
+    // printf("mo ");
+    }
+    
+    return top;
+}
+
+struct node *pop(struct node *top){
+    struct node *ptr;
+    
+    if(top==NULL){
+        printf("Nothing to pop\n");
+    }
+    
+    else{
+        ptr = top;
+    // ptr = ptr -> next;
+    // free(top);
+    // top = ptr;
+    top = top -> next;
+    free(ptr);
+    // top = ptr;
+    }
+    
+    return top;
+};
+
+void printStack(struct node *top){
+    // printf("hello ");
+    // struct node *ptr;
+    // ptr=top;
+    printf("Elements of stack are : ");
+    while(top!=NULL){
+        printf("%d \n",top->data);
+        top = top -> next;
+    }
+   
+}
+
+int main()
+{
+  int op;
+  struct node *top=NULL;
+  while(1){
+      printf("\nSelection the operation \n1. Push \n2. Pop \n3.Print stack \n");
+      scanf("%d",&op);
+      switch(op){
+          case 1:
+            int value;
+            printf("Enter the stack elements to be inserted \n");
+            scanf("%d",&value);
+            top = push(top,value);
+            
+            break;
+            
+          case 2:
+            top = pop(top);
+            break;
+          
+          case 3:
+            printStack(top);
+            break;
+      }
+  }
+  return 0;
+}
+
+//Output
+
+
